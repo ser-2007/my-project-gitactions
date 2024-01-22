@@ -6,7 +6,6 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
 name: Java CI with Gradle
 
 on:
@@ -20,25 +19,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
+    - name: Depoyu çek
       uses: actions/checkout@v2
 
-    - name: Set up JDK 1.8
+    - name: JDK 1.8 kur
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
 
-    - name: Grant execute permission for gradlew
+    - name: gradlew için çalıştırma izni ver
       run: chmod +x gradlew
 
-    - name: Build with Gradle
+    - name: Gradle ile derleme yap
       run: ./gradlew build
 
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
-      with:
-        image: ser2007/demo-app
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: ./Dockerfile
+    - name: Docker İmajını Oluştur ve Yayınla
+      run: |
+        docker build -f Dockerfile -t ser2007/demo-app:latest .
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push ser2007/demo-app:latest
+
