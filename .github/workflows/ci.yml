@@ -67,9 +67,7 @@ jobs:
       run: ./gradlew build
 
     - name: Docker İmajını Oluştur ve Yayınla
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: 'https://index.docker.io/v1/'
-        tags: 'ser2007/demo-app:latest'
+      run: |
+        docker build -f Dockerfile -t ser2007/demo-app:latest .
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push ser2007/demo-app:latest
