@@ -38,7 +38,6 @@
       #  docker build -f Dockerfile -t ser2007/demo-app:latest .
        # docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         #docker push ser2007/demo-app:latest
-
 name: Java CI with Gradle
 
 on:
@@ -58,7 +57,7 @@ jobs:
     - name: JDK 1.8 kur
       uses: actions/setup-java@v2
       with:
-        java-version: 1.8
+        java-version: '8.0.402+6'
         distribution: 'adopt'
 
     - name: gradlew için çalıştırma izni ver
@@ -72,4 +71,3 @@ jobs:
         docker build -f Dockerfile -t ser2007/demo-app:latest .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push ser2007/demo-app:latest
-
