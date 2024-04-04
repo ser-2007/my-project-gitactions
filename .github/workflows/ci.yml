@@ -59,6 +59,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: 1.8
+        distribution: 'adopt'
 
     - name: gradlew için çalıştırma izni ver
       run: chmod +x gradlew
@@ -71,3 +72,4 @@ jobs:
         docker build -f Dockerfile -t ser2007/demo-app:latest .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push ser2007/demo-app:latest
+
